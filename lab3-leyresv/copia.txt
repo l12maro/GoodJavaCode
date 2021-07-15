@@ -1,0 +1,131 @@
+public class XMLChecker {
+    public static boolean wellformedXML(String xml){
+
+        // Local variables
+        String tag = ""; // accumulates the current tag without the reserved characters
+        String root = ""; // stores the root tag
+        boolean isBeginTag = false; // indicates that we're in a begin tag: <tag> or <tag/>
+        boolean isCloseTag = false; // indicates if the tag is a close tag: </tag> or <tag/>
+        Stack<String> stack = new Stack<>(); /* a stack of tags that that are not close tags:
+                                                they get removed by their corresponding close tags.
+                                                The tags are stored without reserved characters */
+
+        // Invalid case: null or empty xml argument
+        if (xml == null || xml.length() == 0){
+            return false;
+        }
+
+        // For each character in the string:
+        for(int i=0; i<xml.length(); i++){
+            char ch = xml.charAt(i);
+
+            // If the character is < (indicates the start of a new begin tag):
+            if (ch == '<'){
+
+                // Invalid case: < in the middle of a tag
+                if (!tag.isEmpty()){
+                    return false;
+                }
+
+                // Else: it means that we're entering a new begin tag
+                isBeginTag = true;
+            }
+
+
+            // Invalid case: the stack is empty and we're not in a tag
+            else if (!isBeginTag && stack.isEmpty()){
+                return false;
+            }
+
+
+            // If the character is / (close tag marker):
+            else if (ch == '/'){
+
+                // Invalid case: double slash or slash outside a tag
+                if (isCloseTag || !isBeginTag){
+                    return false;
+                }
+
+                // Mark the tag as close tag: </ (normal close tag) or <tag/ (begin and close tag)
+                isCloseTag = true;
+
+                // If the tag is empty, it's a normal close tag
+                if (tag.isEmpty()){
+                    isBeginTag = false;
+                }
+            }
+
+
+            // If the character is >:
+            else if (ch == '>'){
+
+                // Invalid case: the root tag is empty <rootTag/>
+                if (isBeginTag && isCloseTag && stack.isEmpty()){
+                    return false;
+                }
+
+                // If it's an opening tag:
+                if (isBeginTag) {
+
+                    // If it's a self contained tag of the type <tag/>, reset all the values and continue
+                    if (isCloseTag) {
+                        tag = "";
+                        isBeginTag = false;
+                        isCloseTag = false;
+                    }
+
+                    // Invalid tag: <> or same tag as the root
+                    else if (tag.isEmpty() || tag.equals(root)) {
+                        return false;
+                    }
+
+                    else {
+                        // If it's the first opening tag, set it as the the root
+                        if (stack.isEmpty()) {
+                            root = tag;
+                        }
+
+                        // Add the tag to the top of the stack
+                        stack.push(tag);
+
+                        // Reset the variables
+                        isBeginTag = false;
+                        tag = "";
+                    }
+                }
+
+                // If it's a closing tag...
+                else if (isCloseTag){
+                    // Invalid cases: </> or closing tag doesn't match with opening tag at the top of the stack
+                    if (tag.isEmpty() || !tag.equals(stack.peek())){
+                        return false;
+                    }
+
+                    //...remove the top of the stack
+                    stack.pop();
+
+                    // Reset the variables
+                    isCloseTag = false;
+                    tag = "";
+
+                }
+                // Invalid case: > used outside a tag
+                else{
+                    return false;
+                }
+
+            }
+
+            // For any other character...
+            else {
+                // ...add it to the tag if we're in a begin or close tag
+                if (isBeginTag || isCloseTag) {
+                    tag += ch;
+                }
+            }
+        }
+
+        return stack.isEmpty() && tag.isEmpty();
+    }
+
+}

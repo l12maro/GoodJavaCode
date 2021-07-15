@@ -1,0 +1,64 @@
+/**
+ * Course:      Data Structures and Algorithms for Language Processing II 2021
+ * Assignment:  Lab 3 - Exercise 1
+ * Author:      Leyre Sanchez Vinuela
+ * Description: Pseudocode to check if an xml string is well formed
+ *
+ * Honor Code:  I pledge that this program represents my own work.
+ * I received help from nobody in designing and debugging my program.
+ */
+
+--------------FIRST STEP: VARIABLES INITIALIZATION-------------------------------------
+
+Initialize variables to empty or false values:
+  - tag: stores the current tag (excluding the reserved characters)
+  - root: stores the root tag (excluding the reserved characters)
+  - stack: stack to accumulate the tags that are not close tags
+  - isBeginTag: indicates that we're inside a begin tag
+  - isCloseTag: indicates that we're inside a close tag
+
+     ------- Logic of the booleans isBeginTag and isCloseTag: ------------
+    |                                                                     |
+    |                                     isBeginTag    isCloseTag        |
+    |    - normal open tag (<tag>):         true         false            |
+    |    - normal close tag (</tag>):       false        true             |
+    |    - self-contained tag(<tag/>):      true         true             |
+    |    - characters outside tag:          false        false            |
+    |                                                                     |
+    -----------------------------------------------------------------------
+
+----------SECOND STEP: LOOPING TRHOUGH THE XML STRING---------------------------------
+
+Loop through each character of the xml string:
+
+      < signals that we start a begin tag -> when we reach it:
+          - if we're inside another tag (tag variable is not empty): fail
+          - any other case: set isBeginTag to true
+
+      If the string doesn't start with a tag: fail
+
+      / signals that it's a close tag -> when we reach it:
+          - if the tag had already another slash or if we're outside a tag : fail
+          - else:
+              - set isCloseTag to true
+              - if tag variable is empty, it's a normal close tag: set isBeginTag to false
+
+
+      > signals the end of the tag -> when we reach it:
+          - if it's an empty root tag: fail
+          - if we're in a begin tag:
+              - if it's a self-contained tag: reset default variables and continue
+              - if the tag is empty or it's the same as the root: fail
+              - if the tag contains whitespace, check if it has well formed attributes and fail if it doesn't
+              - if it's the root tag: store its value (without attributes) in the variable root
+              - add the tag (without attributes) to the top of the stack and reset the tag variables
+
+          - else if we're in a close tag:
+              - if the tag is empty or it doesn't match the top of the stack or it contains whitespace: fail
+              - else: remove the top of the stack an reset the tag variables
+
+          - in any other case, > is being used outside a tag : fail
+
+      for any other character: add it to the tag variable if we're inside a tag
+
+When we finish the iteration: if the stack and the variable tag are empty ==> xml is well formed

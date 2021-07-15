@@ -1,0 +1,40 @@
+Examples:
+
+ 
+//True
+<tag></tag>
+<tag> some data </tag>
+<rootTag><anotherTag>text text text</anotherTag></rootTag>
+<aTag>data<anotherTag>text text text</anotherTag></aTag>
+<tag> <emptyTag/> </tag>
+
+//attribute True
+<tag attribute="anAttribute"> text </tag>
+<person age="54"> J.K. Rowling </person>
+
+
+//False
+"abc"
+"abc<tag></tag>"
+"<tag>abc</tag>abc"
+"<>"
+"</>"
+"<tag>"
+"<tag>data</Tag>"
+"<tag></tag>data<tag></tag>";
+"<tag<>data</tag>";
+"<tag></ta/g>";
+"</tag>"
+"<tag><tag></tag></tag>"
+"<tags> <something> </something> <tags> </aTag> </aTag>"
+"<tag></tag"
+"<tag></tag>>"
+"<tag1> </tag1> <tag2></tag2>"
+ null
+""
+<tag> text>text </tag>
+
+
+//attribute False
+<tag anAttribute="aValue"> text </tag anAttribute="aValue">
+<tag attribute> random data</tag>
