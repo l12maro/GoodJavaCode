@@ -1,0 +1,58 @@
+%% word                 tag     morph           edge    parent  secedge comment
+#BOS 1 26 1068105868 475 %% HEADLINE
+Veruntreute		VVFIN	3sit		HD	500
+die			ART	nsf		-	504
+AWO			NN	nsf		-	501
+Spendengeld		NN	asn		HD	502
+?			$.	--		--	0
+#500			VXFIN	--		HD	503
+#501			EN-ADD	--		HD	504
+#502			NX	--		OA	505
+#503			LK	--		-	506
+#504			NX	--		ON	505
+#505			MF	--		-	506
+#506			SIMPX	--		--	0
+#EOS 1
+#BOS 2 27 1070544928 475 %% HEADLINE
+Staatsanwaltschaft	NN	nsf		HD	500
+muß			VMFIN	3sis		HD	501
+AWO-Konten		NN	apn		HD	502
+prüfen			VVINF	--		HD	503
+/			$(	--		--	0
+Flossen			VVFIN	3pit		HD	504
+165.000			CARD	--		HD	505
+Mark			NN	npf		HD	515
+Sammelgelder		NN	npn		HD	506
+für			APPR	a		-	516
+Flutopfer		NN	apn		HD	507
+in			APPR	a		-	517
+ein			ART	asn		-	508
+Altenheim		NN	asn		HD	508
+in			APPR	d		-	518
+Danzig			NE	dsn		HD	509
+?			$.	--		--	0
+#500			NX	--		ON	510
+#501			VXFIN	--		HD	511
+#502			NX	--		OA	512
+#503			VXINF	--		OV	513
+#504			VXFIN	--		HD	514
+#505			ADJX	--		-	515
+#506			NX	--		-	520
+#507			NX	--		HD	516
+#508			NX	--		HD	517
+#509			NX	--		HD	518
+#510			VF	--		-	519
+#511			LK	--		-	519
+#512			MF	--		-	519
+#513			VC	--		-	519
+#514			LK	--		-	523
+#515			NX	--		HD	520
+#516			PX	--		-	521
+#517			PX	--		V-MOD	522
+#518			PX	--		MOD	522
+#519			SIMPX	--		--	0
+#520			NX	--		HD	521
+#521			NX	--		ON	522
+#522			MF	--		-	523
+#523			SIMPX	--		--	0
+#EOS 2
