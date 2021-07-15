@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<addressbook>
+	<address>
+		<forename>Noam</forename>
+		<surname>Chomsky</surname>
+		<email>chomsky@mit.edu</email>
+	</address>
+	<address>
+		<forename>Alan</forename>
+		<surname>Turing</surname>
+		<email>alan@turing.complete</email>
+	</address>
+	<address>
+		<forename>Ada</forename>
+		<surname>Lovelace</surname>
+		<email>ada@analyticalengine.uk</email>
+	</address>
+	<address>
+		<forename>Guido</forename>
+		<surname>van Rossum</surname>
+		<email>guido@python.org</email>
+	</address>
+</addressbook>
